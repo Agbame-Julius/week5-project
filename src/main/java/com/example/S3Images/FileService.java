@@ -21,7 +21,7 @@ public class FileService {
     @Autowired
     private AmazonS3 s3Client;
 
-    private String bucketName = "my-bucket-for-project";
+    private String bucketName = "my-file-bucket-for-project";
 
     public Image uploadImage(MultipartFile file) throws IOException {
         String fileName = generateUniqueFileName(file.getOriginalFilename());
