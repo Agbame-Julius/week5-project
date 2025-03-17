@@ -45,4 +45,18 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest  .
 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          
+                - name: Update the ECS Task definition
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: td.json
+          container-name: project-container-8080-tcp
+          image: ${{ steps.build-image.outputs.image }}
+      - name: Automatic Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: Mini-Project-Service
+          cluster: Project
+          wait-for-service-stability: true
 
