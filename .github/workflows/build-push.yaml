@@ -51,7 +51,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: td.json
-          container-name: project-container-8080-tcp
+          container-name: project-container
           image: ${{ steps.image.outputs.image }}
       - name: Automatic Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
