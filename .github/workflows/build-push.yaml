@@ -46,7 +46,7 @@ jobs:
 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           
-                - name: Update the ECS Task definition
+      - name: Update the ECS Task definition
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: td.json
