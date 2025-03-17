@@ -36,7 +36,7 @@ jobs:
           registry-type: private
 
       - name: Build, tag, and push Docker image to Amazon ECR
-        id: build-image
+        id: image
         env:
           ECR_REGISTRY: 575108954720.dkr.ecr.us-east-1.amazonaws.com
           ECR_REPOSITORY: project
@@ -45,13 +45,14 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest  .
 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
           
       - name: Update the ECS Task definition
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: td.json
           container-name: project-container-8080-tcp
-          image: ${{ steps.build-image.outputs.image }}
+          image: ${{ steps.image.outputs.image }}
       - name: Automatic Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
