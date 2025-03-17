@@ -48,6 +48,7 @@ jobs:
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
           
       - name: Update the ECS Task definition
+        id: task-defn
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: td.json
@@ -56,7 +57,7 @@ jobs:
       - name: Automatic Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          task-definition: ${{ steps.task-defn.outputs.task-definition }}
           service: chalechale
           cluster: Project
           wait-for-service-stability: true
