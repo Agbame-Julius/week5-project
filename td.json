@@ -1,13 +1,13 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:575108954720:task-definition/Project-td:3",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:575108954720:task-definition/mini-project-task-definition:5",
   "containerDefinitions": [
     {
-      "name": "project-container",
+      "name": "mini-project-container",
       "image": "575108954720.dkr.ecr.us-east-1.amazonaws.com/project:latest",
       "cpu": 0,
       "portMappings": [
         {
-          "name": "project-container-8080-tcp",
+          "name": "mini-project-container-8080-tcp",
           "containerPort": 8080,
           "hostPort": 8080,
           "protocol": "tcp",
@@ -23,7 +23,7 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/Project-td",
+          "awslogs-group": "/ecs/mini-project-task-definition",
           "mode": "non-blocking",
           "awslogs-create-group": "true",
           "max-buffer-size": "25m",
@@ -35,11 +35,11 @@
       "systemControls": []
     }
   ],
-  "family": "Project-td",
+  "family": "mini-project-task-definition",
   "taskRoleArn": "arn:aws:iam::575108954720:role/ecs-role",
   "executionRoleArn": "arn:aws:iam::575108954720:role/ecs-role",
   "networkMode": "awsvpc",
-  "revision": 3,
+  "revision": 5,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -88,7 +88,7 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2025-03-17T15:09:34.126Z",
+  "registeredAt": "2025-03-18T09:36:32.370Z",
   "registeredBy": "arn:aws:iam::575108954720:root",
   "enableFaultInjection": false,
   "tags": []
